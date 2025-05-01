@@ -24,12 +24,29 @@ In case you want to use a custom app dir name (e.g. `/myapp/`):
 ```bash
 composer create-project --prefer-dist cakephp/app myapp
 ```
+Next, install [tailwind](https://tailwindcss.com/docs) and [vite](https://vite.dev/guide/)
+with npm:
+
+```bash
+npm install
+```
+
+You will need to build assets as well:
+
+```bash
+npm run build
+````
 
 You can now either use your machine's webserver to view the default home page, or start
 up the built-in webserver with:
 
 ```bash
 bin/cake server -p 8765
+```
+In a separate terminal you can run `vite dev` to have CSS rebuilt on-demand.
+
+```bash
+npm run dev
 ```
 
 Then visit `http://localhost:8765` to see the welcome page.
@@ -48,6 +65,5 @@ Other environment agnostic settings can be changed in `config/app.php`.
 
 ## Layout
 
-The app skeleton uses [Milligram](https://milligram.io/) (v1.3) minimalist CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
+The app skeleton uses the [tailwind](https://tailwindcss.com/docs) CSS
+framework by default.

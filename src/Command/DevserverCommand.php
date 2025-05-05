@@ -7,6 +7,7 @@ use Cake\Command\Command;
 use Cake\Console\Arguments;
 use Cake\Console\ConsoleIo;
 use Cake\Console\ConsoleOptionParser;
+use Cake\Console\Exception\StopException;
 
 /**
  * Devserver command.
@@ -58,11 +59,14 @@ class DevserverCommand extends Command
      *
      * @param \Cake\Console\Arguments $args The command arguments.
      * @param \Cake\Console\ConsoleIo $io The console io
-     * @return int|null|void The exit code or null for success
+     * @return int|null The exit code or null for success
      */
-    public function execute(Arguments $args, ConsoleIo $io)
+    public function execute(Arguments $args, ConsoleIo $io): ?int
     {
         $cwd = getcwd();
+        if ($cwd === false) {
+            throw new StopException('Cannot read CWD');
+        }
         $pipeSpec = [
             ['pipe', 'r'],
             ['pipe', 'w'],
@@ -121,5 +125,9 @@ class DevserverCommand extends Command
             proc_close($server['process']);
         }
         $io->out('Shutdown complete');
+
+        // We exit error as, normally this process gets killed with ctrl-c, and we
+        // should only get here if a server died.
+        return static::CODE_ERROR;
     }
 }

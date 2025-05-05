@@ -68,6 +68,8 @@ class DevserverCommand extends Command
             ['pipe', 'w'],
             ['pipe', 'w'],
         ];
+        // Input is a 'server'.
+        // Servers have a name, command to run, and environment vars.
         $io->verbose('Starting bin/cake/server');
         $cakeserver = proc_open('bin/cake server', $pipeSpec, $cakePipes, $cwd, ['CAKE_DEVSERVER' => '1']);
         stream_set_blocking($cakePipes[1], false);
@@ -78,6 +80,7 @@ class DevserverCommand extends Command
         stream_set_blocking($npmPipes[1], false);
         stream_set_blocking($npmPipes[2], false);
 
+        // Prototype of internal data model
         $servers = [
             [
                 'name' => 'cake',
@@ -94,6 +97,8 @@ class DevserverCommand extends Command
         while ($poll) {
             foreach ($servers as $server) {
                 if (!is_resource($server['process'])) {
+                    // Currently the devserver crashes as soon as any child dies.
+                    // This may not be the ideal behavior, but we'll have to play with it for a while.
                     $io->err("{$server['name']} has died!");
                     $io->err((string)fgets($server['pipes'][2]));
                     $poll = false;
@@ -108,6 +113,7 @@ class DevserverCommand extends Command
                     $io->out($server['name'] . ' | ' . $err, 0);
                 }
             }
+            // Perhaps the polling interval should be configurable?
             usleep(100);
         }
         $io->verbose('Start shutdown');

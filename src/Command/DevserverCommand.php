@@ -66,7 +66,7 @@ class DevserverCommand extends Command
         $pipeSpec = [
             ['pipe', 'r'],
             ['pipe', 'w'],
-            ['pipe', 'r'],
+            ['pipe', 'w'],
         ];
         $io->verbose('Starting bin/cake/server');
         $cakeserver = proc_open('bin/cake server', $pipeSpec, $cakePipes, $cwd, ['CAKE_DEVSERVER' => '1']);
@@ -90,14 +90,29 @@ class DevserverCommand extends Command
                 'pipes' => $npmPipes,
             ],
         ];
-        while (is_resource($cakeserver) && is_resource($npm)) {
+        $poll = true;
+        while ($poll) {
             foreach ($servers as $server) {
+                if (!is_resource($server['process'])) {
+                    $io->err("{$server['name']} has died!");
+                    $io->err((string)fgets($server['pipes'][2]));
+                    $poll = false;
+                    break;
+                }
                 $output = fgets($server['pipes'][1]);
                 if ($output !== false && strlen($output)) {
                     $io->out($server['name'] . ' | ' . $output, 0);
                 }
+                $err = fgets($server['pipes'][2]);
+                if ($err !== false && strlen($err)) {
+                    $io->out($server['name'] . ' | ' . $err, 0);
+                }
             }
             usleep(100);
+        }
+        $io->verbose('Start shutdown');
+        foreach ($servers as $server) {
+            proc_close($server['process']);
         }
         $io->out('Shutdown complete');
     }

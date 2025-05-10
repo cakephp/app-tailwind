@@ -49,6 +49,14 @@ In a separate terminal you can run `vite dev` to have CSS rebuilt on-demand.
 npm run dev
 ```
 
+Alternatively, you can run both `cake server` and `npm run dev` with:
+
+```bash
+bin/cake devserver
+```
+
+The `devserver` command is experimental.
+
 Then visit `http://localhost:8765` to see the welcome page.
 
 ## Update

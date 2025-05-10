@@ -75,7 +75,13 @@ class DevserverCommand extends Command
         // Input is a 'server'.
         // Servers have a name, command to run, and environment vars.
         $io->verbose('Starting bin/cake/server');
-        $cakeserver = proc_open('bin/cake server', $pipeSpec, $cakePipes, $cwd, ['CAKE_DEVSERVER' => '1']);
+        $cakeserver = proc_open(
+            'bin/cake server',
+            $pipeSpec,
+            $cakePipes,
+            $cwd,
+            ['CAKE_DEVSERVER' => '1', 'PATH' => getenv('PATH')],
+        );
         stream_set_blocking($cakePipes[1], false);
         stream_set_blocking($cakePipes[2], false);
 

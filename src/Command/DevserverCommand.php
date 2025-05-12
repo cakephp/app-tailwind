@@ -128,7 +128,9 @@ class DevserverCommand extends Command
         }
         $io->verbose('Start shutdown');
         foreach ($servers as $server) {
-            proc_close($server['process']);
+            if ($server['process']) {
+                proc_close($server['process']);
+            }
         }
         $io->out('Shutdown complete');
 

@@ -34,11 +34,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-nav">
+    <nav class="flex justify-between max-w-3xl mx-auto py-4">
         <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
+                <a class="text-xl" href="<?= $this->Url->build('/') ?>">
+                    <span class="text-gray-600">Cake</span><span class="text-red-500">PHP</span>
+                </a>
         </div>
-        <div class="top-nav-links">
+        <div class="flex gap-2">
             <a target="_blank" rel="noopener" href="https://book.cakephp.org/5/">Documentation</a>
             <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
         </div>

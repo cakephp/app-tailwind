@@ -49,7 +49,7 @@
 {% for alias, details in associations.BelongsTo %}
 {% if field == details.foreignKey %}
 {% set isKey = true %}
-                    <td><?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}]) : '' ?></td>
+                    <td class="text-left"><?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}]) : '' ?></td>
 {% endif %}
 {% endfor %}
 {% endif %}
@@ -59,11 +59,11 @@
 {% if columnData.type starts with 'enum-' %}
                     <td class="text-center"><?= ${{ singularVar }}->{{ field }} === null ? '' : h(${{ singularVar }}->{{ field }}->{% if supportsLabel %}label(){% else %}value{% endif %}) ?></td>
 {% elseif columnData.type not in ['integer', 'float', 'decimal', 'biginteger', 'smallinteger', 'tinyinteger'] %}
-                    <td class="text-center"><?= h(${{ singularVar }}->{{ field }}) ?></td>
+                    <td class="text-right"><?= h(${{ singularVar }}->{{ field }}) ?></td>
 {% elseif columnData.null %}
-                    <td class="text-center"><?= ${{ singularVar }}->{{ field }} === null ? '' : $this->Number->format(${{ singularVar }}->{{ field }}) ?></td>
+                    <td class="text-right"><?= ${{ singularVar }}->{{ field }} === null ? '' : $this->Number->format(${{ singularVar }}->{{ field }}) ?></td>
 {% else %}
-                    <td class="text-center"><?= $this->Number->format(${{ singularVar }}->{{ field }}) ?></td>
+                    <td class="text-right"><?= $this->Number->format(${{ singularVar }}->{{ field }}) ?></td>
 {% endif %}
 {% endif %}
 {% endfor %}
@@ -85,10 +85,7 @@
             </tbody>
         </table>
     </div>
-    <?php
-    $this->Paginator->
-    ?>
-    <div class="flex items-center gap-3">
+    <div class="py-2 flex items-center gap-3">
         <ul class="flex items-center gap-3">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>

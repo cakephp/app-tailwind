@@ -45,7 +45,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
         </div>
     </nav>
-    <main class="main max-w-3xl mx-auto">
+    <main class="main max-w-4xl mx-auto">
         <div class="container">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>

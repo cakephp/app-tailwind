@@ -122,8 +122,7 @@
             <div class="mt-4">
                 <h4 class="text-lg"><?= __('Related {{ otherPluralHumanName }}') ?></h4>
                 <?php if (!empty(${{ singularVar }}->{{ details.property }})) : ?>
-                <div class="w-full">
-                    <table>
+                    <table class="w-full">
                         <tr>
 {% for field in details.fields %}
                             <th class="text-left pb-2"><?= __('{{ field|humanize }}') ?></th>
@@ -151,7 +150,6 @@
                         </tr>
                         <?php endforeach; ?>
                     </table>
-                </div>
                 <?php endif; ?>
             </div>
 {% endfor %}

@@ -42,7 +42,7 @@
             </thead>
             <tbody>
                 <?php foreach (${{ pluralVar }} as ${{ singularVar }}): ?>
-                <tr>
+                <tr class="odd:bg-white even:bg-gray-50 *:py-2 *:px-1">
 {% for field in fields %}
 {% set isKey = false %}
 {% if associations.BelongsTo is defined %}
@@ -69,14 +69,15 @@
 {% endfor %}
 {% set pk = '$' ~ singularVar ~ '->' ~ primaryKey[0] %}
                     <td class="flex justify-center items-center gap-2">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', {{ pk|raw }}]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', {{ pk|raw }}]) ?>
+                        <?= $this->Html->link(__('View'), ['action' => 'view', {{ pk|raw }}], ['class' => 'hover:text-red-800']) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', {{ pk|raw }}], ['class' => 'hover:text-red-800']) ?>
                         <?= $this->Form->postLink(
                             __('Delete'),
                             ['action' => 'delete', {{ pk|raw }}],
                             [
                                 'method' => 'delete',
                                 'confirm' => __('Are you sure you want to delete # {0}?', {{ pk|raw }}),
+                                'class' => 'hover:text-red-800',
                             ]
                         ) ?>
                     </td>

@@ -30,7 +30,7 @@
         <?= $this->Html->link(__('Edit {{ singularHumanName }}'), ['action' => 'edit', {{ pK|raw }}]) ?>
         <?= $this->Form->postLink(__('Delete {{ singularHumanName }}'), ['action' => 'delete', {{ pK|raw }}], ['confirm' => __('Are you sure you want to delete # {0}?', {{ pK|raw }})]) ?>
         <?= $this->Html->link(__('List {{ pluralHumanName }}'), ['action' => 'index']) ?>
-        <?= $this->Html->link(__('New {{ singularHumanName }}'), ['action' => 'add']) ?>
+        <?= $this->Html->link(__('New {{ singularHumanName }}'), ['action' => 'add'], ['class' => 'bg-red-50']) ?>
 {% set done = [] %}
     </aside>
     <div class="col-span-2">

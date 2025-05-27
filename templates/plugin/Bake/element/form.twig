@@ -15,20 +15,18 @@
 #}
 {% set fields = Bake.filterFields(fields, schema, modelObject) %}
 <div class="grid grid-cols-3 gap-2">
-    <aside class="col-span-1">
-        <div class="side-nav">
-            <h4 class="text-lg"><?= __('Actions') ?></h4>
+    <aside class="col-span-1 flex flex-col gap-2">
+        <h4 class="text-lg"><?= __('Actions') ?></h4>
 {% if 'add' not in action %}
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', ${{ singularVar }}->{{ primaryKey[0] }}],
-                ['confirm' => __('Are you sure you want to delete # {0}?', ${{ singularVar }}->{{ primaryKey[0] }}), 'class' => 'side-nav-item']
-            ) ?>
+        <?= $this->Form->postLink(
+            __('Delete'),
+            ['action' => 'delete', ${{ singularVar }}->{{ primaryKey[0] }}],
+            ['confirm' => __('Are you sure you want to delete # {0}?', ${{ singularVar }}->{{ primaryKey[0] }})]
+        ) ?>
 {% endif %}
-            <?= $this->Html->link(__('List {{ pluralHumanName }}'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            {{- "\n" }}
+        <?= $this->Html->link(__('List {{ pluralHumanName }}'), ['action' => 'index']) ?>
+        {{- "\n" }}
 {%- set done = [] %}
-        </div>
     </aside>
     <div class="col-span-2">
         <div class="w-full">

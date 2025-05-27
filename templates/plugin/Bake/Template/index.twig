@@ -23,11 +23,7 @@
 {% set fields = Bake.filterFields(fields, schema, modelObject, indexColumns, ['binary', 'text']) %}
     <div class="pb-3 flex justify-between items-center">
         <h3 class="text-lg"><?= __('{{ pluralHumanName }}') ?></h3>
-        <?= $this->Html->link(
-            __('New {{ singularHumanName }}'),
-            ['action' => 'add'],
-            ['class' => 'bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded']
-        ) ?>
+        <?= $this->Html->link( __('New {{ singularHumanName }}'), ['action' => 'add']) ?>
     </div>
 {% set done = [] %}
     <div>
@@ -42,7 +38,7 @@
             </thead>
             <tbody>
                 <?php foreach (${{ pluralVar }} as ${{ singularVar }}): ?>
-                <tr>
+                <tr class="odd:bg-white even:bg-gray-50 *:py-2 *:px-1">
 {% for field in fields %}
 {% set isKey = false %}
 {% if associations.BelongsTo is defined %}

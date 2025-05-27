@@ -41,11 +41,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 </a>
         </div>
         <div class="flex gap-2">
-            <a target="_blank" rel="noopener" href="https://book.cakephp.org/5/">Documentation</a>
-            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
+            <?= $this->Html->link('Documentation', 'https://book.cakephp.org/5/', ['target' => '_blank', 'rel' => 'noopener']) ?>
+            <?= $this->Html->link('Documentation', 'https://api.cakephp.org/', ['target' => '_blank', 'rel' => 'noopener']) ?>
         </div>
     </nav>
-    <main class="main max-w-3xl mx-auto">
+    <main class="main max-w-4xl mx-auto">
         <div class="container">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>

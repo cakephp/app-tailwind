@@ -24,18 +24,18 @@
 {% set associationFields = fieldsData.associationFields %}
 {% set groupedFields = fieldsData.groupedFields %}
 {% set pK = '$' ~ singularVar ~ '->' ~ primaryKey[0] %}
-<div class="grid grid-cols-3 gap-2">
-    <aside class="col-span-1 flex flex-col gap-2">
-        <h4 class="text-lg"><?= __('Actions') ?></h4>
-        <?= $this->Html->link(__('Edit {{ singularHumanName }}'), ['action' => 'edit', {{ pK|raw }}]) ?>
-        <?= $this->Form->postLink(__('Delete {{ singularHumanName }}'), ['action' => 'delete', {{ pK|raw }}], ['confirm' => __('Are you sure you want to delete # {0}?', {{ pK|raw }})]) ?>
-        <?= $this->Html->link(__('List {{ pluralHumanName }}'), ['action' => 'index']) ?>
-        <?= $this->Html->link(__('New {{ singularHumanName }}'), ['action' => 'add'], ['class' => 'bg-red-50']) ?>
+<div class="grid grid-cols-3 gap-2 pt-5">
+    <aside class="col-span-1 flex flex-col gap-2 pr-2">
+        <h4 class="text-xl mb-3"><?= __('Actions') ?></h4>
+        <?= $this->Html->link(__('Edit {{ singularHumanName }}'), ['action' => 'edit', {{ pK|raw }}], ['class' => 'hover:text-red-800']) ?>
+        <?= $this->Form->postLink(__('Delete {{ singularHumanName }}'), ['action' => 'delete', {{ pK|raw }}], ['confirm' => __('Are you sure you want to delete # {0}?', {{ pK|raw }}), 'class' => 'hover:text-red-800']) ?>
+        <?= $this->Html->link(__('List {{ pluralHumanName }}'), ['action' => 'index'], ['class' => 'hover:text-red-800']) ?>
+        <?= $this->Html->link(__('New {{ singularHumanName }}'), ['action' => 'add'], ['class' => 'hover:text-red-800']) ?>
 {% set done = [] %}
     </aside>
     <div class="col-span-2">
         <div class="w-full">
-            <h3 class="text-xl"><?= h(${{ singularVar }}->{{ displayField }}) ?></h3>
+            <h3 class="text-xl mb-3"><?= h(${{ singularVar }}->{{ displayField }}) ?></h3>
             <table class="w-full">
 {% if groupedFields['string'] %}
 {% for field in groupedFields['string'] %}
@@ -43,7 +43,7 @@
 {% set details = associationFields[field] %}
                 <tr>
                     <th class="text-left pb-2"><?= __('{{ details.property|humanize }}') ?></th>
-                    <td><?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}]) : '' ?></td>
+                    <td><?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}], ['class' => 'hover:text-red-800']) : '' ?></td>
                 </tr>
 {% else %}
                 <tr>
@@ -57,7 +57,7 @@
 {% for alias, details in associations.HasOne %}
                 <tr>
                     <th class="text-left pb-2"><?= __('{{ alias|underscore|singularize|humanize }}') ?></th>
-                    <td><?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}]) : '' ?></td>
+                    <td><?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}], ['class' => 'hover:text-red-800']) : '' ?></td>
                 </tr>
 {% endfor %}
 {% endif %}
@@ -100,7 +100,7 @@
 {% for field in groupedFields.boolean %}
                 <tr>
                     <th class="text-left pb-2"><?= __('{{ field|humanize }}') ?></th>
-                    <td><?= ${{ singularVar }}->{{ field }} ? __('Yes') : __('No'); ?></td>
+                    <td><?= ${{ singularVar }}->{{ field }} ? '✔' : '✖'; ?></td>
                 </tr>
 {% endfor %}
 {% endif %}
@@ -120,7 +120,7 @@
 {% set otherSingularVar = alias|singularize|variable %}
 {% set otherPluralHumanName = details.controller|underscore|humanize %}
             <div class="mt-4">
-                <h4 class="text-lg"><?= __('Related {{ otherPluralHumanName }}') ?></h4>
+                <h4 class="text-xl mb-2"><?= __('Related {{ otherPluralHumanName }}') ?></h4>
                 <?php if (!empty(${{ singularVar }}->{{ details.property }})) : ?>
                     <table class="w-full">
                         <tr>
@@ -130,20 +130,21 @@
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach (${{ singularVar }}->{{ details.property }} as ${{ otherSingularVar }}) : ?>
-                        <tr>
+                        <tr class="odd:bg-white even:bg-gray-50 *:py-2 *:px-1">
 {% for field in details.fields %}
-                            <td><?= h(${{ otherSingularVar }}->{{ field }}) ?></td>
+                            <td ><?= h(${{ otherSingularVar }}->{{ field }}) ?></td>
 {% endfor %}
 {% set otherPk = '$' ~ otherSingularVar ~ '->' ~ details.primaryKey[0] %}
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => '{{ details.controller }}', 'action' => 'view', {{ otherPk|raw }}]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => '{{ details.controller }}', 'action' => 'edit', {{ otherPk|raw }}]) ?>
+                                <?= $this->Html->link(__('View'), ['controller' => '{{ details.controller }}', 'action' => 'view', {{ otherPk|raw }}], ['class' => 'hover:text-red-800']) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => '{{ details.controller }}', 'action' => 'edit', {{ otherPk|raw }}], ['class' => 'hover:text-red-800']) ?>
                                 <?= $this->Form->postLink(
                                     __('Delete'),
                                     ['controller' => '{{ details.controller }}', 'action' => 'delete', {{ otherPk|raw }}],
                                     [
                                         'method' => 'delete',
                                         'confirm' => __('Are you sure you want to delete # {0}?', {{ otherPk|raw }}),
+                                        'class' => 'hover:text-red-800',
                                     ]
                                 ) ?>
                             </td>

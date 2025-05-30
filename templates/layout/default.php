@@ -34,15 +34,17 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="flex justify-between max-w-3xl mx-auto py-4">
-        <div class="top-nav-title">
-                <a class="text-xl" href="<?= $this->Url->build('/') ?>">
-                    <span class="text-gray-600">Cake</span><span class="text-red-500">PHP</span>
-                </a>
-        </div>
-        <div class="flex gap-2">
-            <?= $this->Html->link('Documentation', 'https://book.cakephp.org/5/', ['target' => '_blank', 'rel' => 'noopener']) ?>
-            <?= $this->Html->link('Documentation', 'https://api.cakephp.org/', ['target' => '_blank', 'rel' => 'noopener']) ?>
+    <nav class="bg-red-50 border-b border-orange-300">
+        <div class="flex justify-between max-w-4xl mx-auto py-4">
+            <div class="top-nav-title">
+                    <a class="text-xl" href="<?= $this->Url->build('/') ?>">
+                        <span class="text-gray-700 font-bold">Cake</span><span class="text-red-800 font-bold">PHP</span>
+                    </a>
+            </div>
+            <div class="flex gap-2">
+                <?= $this->Html->link('Documentation', 'https://book.cakephp.org/5/', ['target' => '_blank', 'rel' => 'noopener']) ?>
+                <?= $this->Html->link('Documentation', 'https://api.cakephp.org/', ['target' => '_blank', 'rel' => 'noopener']) ?>
+            </div>
         </div>
     </nav>
     <main class="main max-w-4xl mx-auto">

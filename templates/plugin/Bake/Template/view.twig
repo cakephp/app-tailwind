@@ -43,7 +43,7 @@
 {% set details = associationFields[field] %}
                 <tr>
                     <th class="text-left pb-2"><?= __('{{ details.property|humanize }}') ?></th>
-                    <td><?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}]) : '' ?></td>
+                    <td><?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}], ['class' => 'hover:text-red-800']) : '' ?></td>
                 </tr>
 {% else %}
                 <tr>
@@ -57,7 +57,7 @@
 {% for alias, details in associations.HasOne %}
                 <tr>
                     <th class="text-left pb-2"><?= __('{{ alias|underscore|singularize|humanize }}') ?></th>
-                    <td><?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}]) : '' ?></td>
+                    <td><?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}], ['class' => 'hover:text-red-800']) : '' ?></td>
                 </tr>
 {% endfor %}
 {% endif %}
@@ -100,7 +100,7 @@
 {% for field in groupedFields.boolean %}
                 <tr>
                     <th class="text-left pb-2"><?= __('{{ field|humanize }}') ?></th>
-                    <td><?= ${{ singularVar }}->{{ field }} ? __('Yes') : __('No'); ?></td>
+                    <td><?= ${{ singularVar }}->{{ field }} ? '✔' : '✖'; ?></td>
                 </tr>
 {% endfor %}
 {% endif %}

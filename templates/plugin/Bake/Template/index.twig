@@ -21,13 +21,13 @@
 ?>
 <div class="{{ pluralVar }} index content">
 {% set fields = Bake.filterFields(fields, schema, modelObject, indexColumns, ['binary', 'text']) %}
-    <div class="pb-3 flex justify-between items-center">
-        <h3 class="text-lg"><?= __('{{ pluralHumanName }}') ?></h3>
-        <?= $this->Html->link( __('New {{ singularHumanName }}'), ['action' => 'add']) ?>
+    <div class="py-5 flex justify-between items-center">
+        <h3 class="text-xl"><?= __('{{ pluralHumanName }}') ?></h3>
+        <?= $this->Html->link( __('New {{ singularHumanName }}'), ['action' => 'add'], ['class' => 'rounded-md hover:bg-red-50 p-2']) ?>
     </div>
 {% set done = [] %}
     <div>
-        <table class="w-full">
+        <table class="w-full ">
             <thead>
                 <tr>
 {% for field in fields %}
@@ -54,6 +54,8 @@
 {% set supportsLabel = Bake.enumSupportsLabel(field, schema) %}
 {% if columnData.type starts with 'enum-' %}
                     <td class="text-center"><?= ${{ singularVar }}->{{ field }} === null ? '' : h(${{ singularVar }}->{{ field }}->{% if supportsLabel %}label(){% else %}value{% endif %}) ?></td>
+{% elseif columnData.type == 'boolean' %}
+                    <td class="text-right"><?= h(${{ singularVar }}->{{ field }} ? '✔' : '✖') ?></td>
 {% elseif columnData.type not in ['integer', 'float', 'decimal', 'biginteger', 'smallinteger', 'tinyinteger'] %}
                     <td class="text-right"><?= h(${{ singularVar }}->{{ field }}) ?></td>
 {% elseif columnData.null %}
@@ -81,7 +83,7 @@
             </tbody>
         </table>
     </div>
-    <div class="py-2 flex items-center gap-3">
+    <div class="py-5 flex items-center gap-3">
         <ul class="flex items-center gap-3">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>

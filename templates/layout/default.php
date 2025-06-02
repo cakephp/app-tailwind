@@ -42,8 +42,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                     </a>
             </div>
             <div class="flex gap-2">
-                <?= $this->Html->link('Documentation', 'https://book.cakephp.org/5/', ['target' => '_blank', 'rel' => 'noopener']) ?>
-                <?= $this->Html->link('Documentation', 'https://api.cakephp.org/', ['target' => '_blank', 'rel' => 'noopener']) ?>
+                <?= $this->Html->link('Docs', 'https://book.cakephp.org/5/', ['target' => '_blank', 'rel' => 'noopener']) ?>
+                <?= $this->Html->link('Api', 'https://api.cakephp.org/', ['target' => '_blank', 'rel' => 'noopener']) ?>
             </div>
         </div>
     </nav>

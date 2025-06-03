@@ -26,7 +26,7 @@
 {% set pK = '$' ~ singularVar ~ '->' ~ primaryKey[0] %}
 <div class="grid grid-cols-3 gap-2 pt-5">
     <aside class="col-span-1 flex flex-col gap-2 pr-2">
-        <h4 class="text-xl mb-3"><?= __('Actions') ?></h4>
+        <h4 class="text-xl mb-1"><?= __('Actions') ?></h4>
         <?= $this->Html->link(__('Edit {{ singularHumanName }}'), ['action' => 'edit', {{ pK|raw }}], ['class' => 'hover:text-red-800']) ?>
         <?= $this->Form->postLink(__('Delete {{ singularHumanName }}'), ['action' => 'delete', {{ pK|raw }}], ['confirm' => __('Are you sure you want to delete # {0}?', {{ pK|raw }}), 'class' => 'hover:text-red-800']) ?>
         <?= $this->Html->link(__('List {{ pluralHumanName }}'), ['action' => 'index'], ['class' => 'hover:text-red-800']) ?>
@@ -35,19 +35,19 @@
     </aside>
     <div class="col-span-2">
         <div class="w-full">
-            <h3 class="text-xl mb-3"><?= h(${{ singularVar }}->{{ displayField }}) ?></h3>
+            <h3 class="font-bold text-xl mb-3"><?= h(${{ singularVar }}->{{ displayField }}) ?></h3>
             <table class="w-full">
 {% if groupedFields['string'] %}
 {% for field in groupedFields['string'] %}
 {% if associationFields[field] is defined %}
 {% set details = associationFields[field] %}
-                <tr>
-                    <th class="text-left pb-2"><?= __('{{ details.property|humanize }}') ?></th>
+                <tr class="*:pb-2">
+                    <th class="text-left"><?= __('{{ details.property|humanize }}') ?></th>
                     <td><?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}], ['class' => 'hover:text-red-800']) : '' ?></td>
                 </tr>
 {% else %}
-                <tr>
-                    <th class="text-left pb-2"><?= __('{{ field|humanize }}') ?></th>
+                <tr class="*:pb-2">
+                    <th class="text-left"><?= __('{{ field|humanize }}') ?></th>
                     <td><?= h(${{ singularVar }}->{{ field }}) ?></td>
                 </tr>
 {% endif %}
@@ -55,16 +55,16 @@
 {% endif %}
 {% if associations.HasOne %}
 {% for alias, details in associations.HasOne %}
-                <tr>
-                    <th class="text-left pb-2"><?= __('{{ alias|underscore|singularize|humanize }}') ?></th>
+                <tr class="*:pb-2">
+                    <th class="text-left"><?= __('{{ alias|underscore|singularize|humanize }}') ?></th>
                     <td><?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}], ['class' => 'hover:text-red-800']) : '' ?></td>
                 </tr>
 {% endfor %}
 {% endif %}
 {% if groupedFields.number %}
 {% for field in groupedFields.number %}
-                <tr>
-                    <th class="text-left pb-2"><?= __('{{ field|humanize }}') ?></th>
+                <tr class="*:pb-2">
+                    <th class="text-left"><?= __('{{ field|humanize }}') ?></th>
 {% set columnData = Bake.columnData(field, schema) %}
 {% if columnData.null %}
                     <td><?= ${{ singularVar }}->{{ field }} === null ? '' : $this->Number->format(${{ singularVar }}->{{ field }}) ?></td>
@@ -107,7 +107,7 @@
             </table>
 {% if groupedFields.text %}
 {% for field in groupedFields.text %}
-            <div class="text">
+            <div class="text pb-2">
                 <strong><?= __('{{ field|humanize }}') ?></strong>
                 <blockquote>
                     <?= $this->Text->autoParagraph(h(${{ singularVar }}->{{ field }})); ?>
@@ -119,7 +119,7 @@
 {% for alias, details in relations %}
 {% set otherSingularVar = alias|singularize|variable %}
 {% set otherPluralHumanName = details.controller|underscore|humanize %}
-            <div class="mt-4">
+            <div class="mt-5">
                 <h4 class="text-xl mb-2"><?= __('Related {{ otherPluralHumanName }}') ?></h4>
                 <?php if (!empty(${{ singularVar }}->{{ details.property }})) : ?>
                     <table class="w-full">

@@ -34,7 +34,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="bg-red-50 border-b border-orange-300">
+    <nav class="bg-amber-50 border-b border-red-600">
         <div class="flex justify-between max-w-4xl mx-auto py-4">
             <div class="top-nav-title">
                     <a class="text-xl" href="<?= $this->Url->build('/') ?>">

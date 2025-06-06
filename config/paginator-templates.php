@@ -7,7 +7,7 @@ declare(strict_types=1);
 return [
     'nextActive' => '<li class=""><a class="hover:text-red-800" rel="next" href="{{url}}">{{text}}</a></li>',
     'nextDisabled' => '<li class="next text-gray-400"><a>{{text}}</a></li>',
-    'prevActive' => '<li class="text-red-800"><a rel="prev" href="{{url}}">{{text}}</a></li>',
+    'prevActive' => '<li class="hover:text-red-800"><a rel="prev" href="{{url}}">{{text}}</a></li>',
     'prevDisabled' => '<li class="prev text-gray-400"><a>{{text}}</a></li>',
     'counterRange' => '{{start}} - {{end}} of {{count}}',
     'counterPages' => '{{page}} of {{pages}}',

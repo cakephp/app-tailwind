@@ -72,6 +72,7 @@ class DevserverCommand extends Command
             ['pipe', 'w'],
             ['pipe', 'w'],
         ];
+
         // Input is a 'server'.
         // Servers have a name, command to run, and environment vars.
         $io->verbose('Starting bin/cake/server');

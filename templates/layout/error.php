@@ -30,10 +30,24 @@
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <div class="error-container">
-        <?= $this->Flash->render() ?>
-        <?= $this->fetch('content') ?>
-        <?= $this->Html->link(__('Back'), 'javascript:history.back()') ?>
-    </div>
+    <nav class="bg-amber-50 border-b border-red-600">
+        <div class="flex justify-between max-w-4xl mx-auto py-4">
+            <div class="top-nav-title">
+                    <a class="text-xl" href="<?= $this->Url->build('/') ?>">
+                        <span class="text-gray-700 font-bold">Cake</span><span class="text-red-800 font-bold">PHP</span>
+                    </a>
+            </div>
+            <div class="flex gap-2">
+                <?= $this->Html->link('Docs', 'https://book.cakephp.org/5/', ['target' => '_blank', 'rel' => 'noopener']) ?>
+                <?= $this->Html->link('Api', 'https://api.cakephp.org/', ['target' => '_blank', 'rel' => 'noopener']) ?>
+            </div>
+        </div>
+    </nav>
+    <main class="main max-w-4xl mx-auto">
+        <div class="container">
+            <?= $this->Flash->render() ?>
+            <?= $this->fetch('content') ?>
+        </div>
+    </main>
 </body>
 </html>

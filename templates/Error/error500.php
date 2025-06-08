@@ -29,8 +29,10 @@ if (Configure::read('debug')) :
     $this->end();
 endif;
 ?>
-<h2><?= __d('cake', 'An Internal Error Has Occurred.') ?></h2>
-<p class="error">
-    <strong><?= __d('cake', 'Error') ?>: </strong>
-    <?= h($message) ?>
-</p>
+<div class="py-5">
+    <h2 class="text-xl pb-3"><?= __d('cake', 'An Internal Error Has Occurred.') ?></h2>
+    <p class="error">
+        <strong><?= __d('cake', 'Error') ?>: </strong>
+        <?= h($message) ?>
+    </p>
+</div>

@@ -17,4 +17,5 @@ return [
     'textarea' => '<textarea class="border border-slate-500 col-span-2 rounded-sm max-w-md min-w-4 p-1" name="{{name}}"{{attrs}}>{{value}}</textarea>',
     'select' => '<select class="border border-slate-500 col-span-2 rounded-sm max-w-md min-w-4 p-1" name="{{name}}"{{attrs}}>{{content}}</select>',
     'selectMultiple' => '<select class="border border-slate-500 col-span-2 rounded-sm max-w-md min-w-50 p-1" name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
+    'radioWrapper' => '<div class="col-span-2 col-start-2 flex gap-2">{{label}}</div>',
 ];

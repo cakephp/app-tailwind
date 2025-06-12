@@ -1,29 +1,23 @@
 # CakePHP Application Skeleton
 
 ![Build Status](https://github.com/cakephp/app/actions/workflows/ci.yml/badge.svg?branch=5.x)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
 [![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
 
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 5.x.
+An application skeleton for creating applications with [CakePHP](https://cakephp.org) 5.x. and [tailwind](https://tailwindcss.com)
 
 The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
 
 ## Installation
 
 1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
+2. Run `php composer.phar create-project --prefer-dist cakephp/app-tailwind [app_name]`.
 
 If Composer is installed globally, run
 
 ```bash
-composer create-project --prefer-dist cakephp/app
+composer create-project --prefer-dist cakephp/app-tailwind myapp
 ```
 
-In case you want to use a custom app dir name (e.g. `/myapp/`):
-
-```bash
-composer create-project --prefer-dist cakephp/app myapp
-```
 Next, install [tailwind](https://tailwindcss.com/docs) and [vite](https://vite.dev/guide/)
 with npm:
 
@@ -31,33 +25,36 @@ with npm:
 npm install
 ```
 
-You will need to build assets as well:
+## Running a development server
 
-```bash
-npm run build
-````
-
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
-
-```bash
-bin/cake server -p 8765
-```
-In a separate terminal you can run `vite dev` to have CSS rebuilt on-demand.
-
-```bash
-npm run dev
-```
-
-Alternatively, you can run both `cake server` and `npm run dev` with:
+You can run both a PHP development server, and tailwind with on-demand rebuilds using:
 
 ```bash
 bin/cake devserver
 ```
 
-The `devserver` command is experimental.
+Then visit `http://localhost:8765` to see the welcome page. If you already have
+a webserver that supports PHP, you can run the tailwind compiler on its own
+with:
 
-Then visit `http://localhost:8765` to see the welcome page.
+```bash
+npm run dev
+```
+
+## Building for production
+
+To build CSS assets for production, use:
+
+```bash
+npm run build
+```
+
+## Bake templates
+
+This application skeleton contains a [bake
+templates](https://book.cakephp.org/bake/3/en/development.html#application-bake-templates)
+and helper templates that produce HTML using tailwind utility classes. You can
+and should adapt these templates to fit the needs of your application.
 
 ## Update
 
@@ -70,8 +67,3 @@ automated upgrades, so you have to do any updates manually.
 Read and edit the environment specific `config/app_local.php` and set up the
 `'Datasources'` and any other configuration relevant for your application.
 Other environment agnostic settings can be changed in `config/app.php`.
-
-## Layout
-
-The app skeleton uses the [tailwind](https://tailwindcss.com/docs) CSS
-framework by default.

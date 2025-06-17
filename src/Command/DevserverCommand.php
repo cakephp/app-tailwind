@@ -8,6 +8,7 @@ use Cake\Console\Arguments;
 use Cake\Console\ConsoleIo;
 use Cake\Console\ConsoleOptionParser;
 use Cake\Console\Exception\StopException;
+use Symfony\Component\Process\Process;
 
 /**
  * Devserver command.
@@ -67,70 +68,77 @@ class DevserverCommand extends Command
         if ($cwd === false) {
             throw new StopException('Cannot read CWD');
         }
-        $pipeSpec = [
-            ['pipe', 'r'],
-            ['pipe', 'w'],
-            ['pipe', 'w'],
-        ];
 
         // Input is a 'server'.
         // Servers have a name, command to run, and environment vars.
         $io->verbose('Starting bin/cake/server');
-        $cakeserver = proc_open(
-            'bin/cake server',
-            $pipeSpec,
-            $cakePipes,
-            $cwd,
-            ['CAKE_DEVSERVER' => '1', 'PATH' => getenv('PATH')],
-        );
-        stream_set_blocking($cakePipes[1], false);
-        stream_set_blocking($cakePipes[2], false);
+        $cakeCommand = ['bin/cake', 'server'];
+        $npmCommand = ['npm', 'run', 'dev'];
 
+        $cakeProcess = new Process($cakeCommand, $cwd, ['CAKE_DEVSERVER' => '1', 'PATH' => getenv('PATH')]);
+        $npmProcess = new Process($npmCommand, $cwd);
+
+        $cakeProcess->start();
+        $io->verbose('Cake server started');
+        $npmProcess->start();
         $io->verbose('Starting npm run dev');
-        $npm = proc_open('npm run dev', $pipeSpec, $npmPipes, $cwd);
-        stream_set_blocking($npmPipes[1], false);
-        stream_set_blocking($npmPipes[2], false);
 
-        // Prototype of internal data model
         $servers = [
             [
                 'name' => 'cake',
-                'process' => $cakeserver,
-                'pipes' => $cakePipes,
+                'process' => $cakeProcess,
             ],
             [
                 'name' => 'npm',
-                'process' => $npm,
-                'pipes' => $npmPipes,
+                'process' => $npmProcess,
             ],
         ];
         $poll = true;
         while ($poll) {
             foreach ($servers as $server) {
-                if (!is_resource($server['process'])) {
-                    // Currently the devserver crashes as soon as any child dies.
-                    // This may not be the ideal behavior, but we'll have to play with it for a while.
-                    $io->err("{$server['name']} has died!");
-                    $io->err((string)fgets($server['pipes'][2]));
+                $process = $server['process'];
+                $name = $server['name'];
+
+                if (!$process->isRunning()) {
                     $poll = false;
+                    $exitCode = $process->getExitCode();
+                    $io->error("$name has died with code $exitCode.");
+                    $errorOutput = trim($process->getErrorOutput());
+                    if ($errorOutput !== '') {
+                        $io->error("$name | $errorOutput");
+                    }
                     break;
                 }
-                $output = fgets($server['pipes'][1]);
-                if ($output !== false && strlen($output)) {
-                    $io->out($server['name'] . ' | ' . $output, 0);
+
+                // Read any incremental output
+                $output = $process->getIncrementalOutput();
+                if (!empty($output)) {
+                    foreach (explode("\n", trim($output)) as $line) {
+                        if ($line !== '') {
+                            $io->info("$name | $line");
+                        }
+                    }
                 }
-                $err = fgets($server['pipes'][2]);
-                if ($err !== false && strlen($err)) {
-                    $io->out($server['name'] . ' | ' . $err, 0);
+
+                $error = $process->getIncrementalErrorOutput();
+                if (!empty($error)) {
+                    foreach (explode("\n", trim($error)) as $line) {
+                        if ($line !== '') {
+                            $io->comment("$name | $line");
+                        }
+                    }
                 }
             }
-            // Perhaps the polling interval should be configurable?
-            usleep(100);
+
+            usleep(100); // Small delay to prevent high CPU usage
         }
+
         $io->verbose('Start shutdown');
         foreach ($servers as $server) {
-            if ($server['process']) {
-                proc_close($server['process']);
+            /** @var \Symfony\Component\Process\Process $process */
+            $process = $server['process'];
+            if ($process->isRunning()) {
+                $process->stop(1); // graceful timeout of 1 second
             }
         }
         $io->out('Shutdown complete');

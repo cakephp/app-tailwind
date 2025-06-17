@@ -1,86 +1,66 @@
-# CakePHP Application Skeleton
+# CakePHP Application Demo Project
 
-![Build Status](https://github.com/cakephp/app/actions/workflows/ci.yml/badge.svg?branch=5.x)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
+## What is this?
 
-An application skeleton for creating applications with [CakePHP](https://cakephp.org) 5.x. and [tailwind](https://tailwindcss.com)
+This is a demo project for CakePHP, showcasing the framework's features and capabilities.
+It is NOT intended for production use, but rather a learning tool for new and existing CakePHP developers.
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+## Get started
 
-## Requierements
-
-1. PHP >= 8.1
-2. NodeJS ^20.19.0 || >=22.12.0
-3. NPM >=8.0.0
-
-## Installation
-
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app-tailwind [app_name]`.
-
-If Composer is installed globally, run
-
-```bash
-composer create-project --prefer-dist cakephp/app-tailwind myapp
-```
-
-To use the latest commit:
-
-```bash
-composer create-project cakephp/app-tailwind tailwind -s dev
-```
-
-Next, install [tailwind](https://tailwindcss.com/docs) and [vite](https://vite.dev/guide/)
-with npm:
-
-```bash
-npm install
-```
-
-## Running a development server
-
-You can run both a PHP development server, and tailwind with on-demand rebuilds using:
-
-```bash
-bin/cake devserver
-```
-
-Then visit `http://localhost:8765` to see the welcome page. If you already have
-a webserver that supports PHP, you can run the tailwind compiler on its own
-with:
-
-```bash
-npm run dev
-```
-
-## Building for production
-
-To build CSS assets for production, use:
-
-```bash
-npm run build
-```
-
-## Bake templates
-
-This application skeleton contains a [bake
-templates](https://book.cakephp.org/bake/3/en/development.html#application-bake-templates)
-and helper templates that produce HTML using tailwind utility classes. You can
-and should adapt these templates to fit the needs of your application.
-
-## Demo app
-
-Check out the [5.x-demo branch](https://github.com/cakephp/app-tailwind/tree/5.x-demo), which contains demo migrations and a seeder.
-See the [README](https://github.com/cakephp/app-tailwind/blob/5.x-demo/README.md) on how to get it running.
-
-## Update
-
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
+The basic setup is all the same as mentioned in the [main branch](https://github.com/cakephp/app-tailwind).
+So make sure you have everything running and then continue with the following steps.
 
 ## Configuration
 
 Read and edit the environment specific `config/app_local.php` and set up the
 `'Datasources'` and any other configuration relevant for your application.
-Other environment agnostic settings can be changed in `config/app.php`.
+
+In our case the easiest way to get started is to use a SQLite database via
+```php
+'Datasources' => [
+    'default' => [
+        'url' => 'sqlite://127.0.0.1/tmp/myapp.sqlite',
+    ],
+]
+```
+
+Make sure the default homepage shows, that it can connect to the database.
+
+## Migrate, Seed & Bake
+
+This branch of the app template contains a migration file, which generates a bunch of tables and fields.
+
+To apply the migrations, run the following command:
+
+```bash
+bin/cake migrations migrate
+```
+
+Next we need to fill the database with some fake data:
+
+```bash
+bin/cake migrations seed --seed TestSeeder
+```
+
+After that you should bake all the code:
+
+```bash
+bin/cake bake all --everything
+```
+
+This should now result in many new files in the `src/` and `templates/` directory.
+
+To have an easier time getting to each area of the application, you can add the following to the
+`templates/layout/default.ctp` file inside the `<nav>` section:
+
+```php
+<div class="flex gap-2">
+    <?= $this->Html->link('Comments', ['controller' => 'Comments', 'action' => 'index']) ?>
+    <?= $this->Html->link('Posts', ['controller' => 'Posts', 'action' => 'index']) ?>
+    <?= $this->Html->link('Profiles', ['controller' => 'Profiles', 'action' => 'index']) ?>
+    <?= $this->Html->link('Tags', ['controller' => 'Tags', 'action' => 'index']) ?>
+    <?= $this->Html->link('Users', ['controller' => 'Users', 'action' => 'index']) ?>
+    <?= $this->Html->link('Docs', 'https://book.cakephp.org/5/', ['target' => '_blank', 'rel' => 'noopener']) ?>
+    <?= $this->Html->link('Api', 'https://api.cakephp.org/', ['target' => '_blank', 'rel' => 'noopener']) ?>
+</div>
+```

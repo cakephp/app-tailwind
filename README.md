@@ -56,6 +56,11 @@ templates](https://book.cakephp.org/bake/3/en/development.html#application-bake-
 and helper templates that produce HTML using tailwind utility classes. You can
 and should adapt these templates to fit the needs of your application.
 
+## Demo app
+
+Check out the [5.x-demo branch](https://github.com/cakephp/app-tailwind/tree/5.x-demo), which contains demo migrations and a seeder.
+See the [README](https://github.com/cakephp/app-tailwind/blob/5.x-demo/README.md) on how to get it running.
+
 ## Update
 
 Since this skeleton is a starting point for your application and various files

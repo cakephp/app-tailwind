@@ -24,13 +24,11 @@ If Composer is installed globally, run
 composer create-project --prefer-dist cakephp/app-tailwind myapp
 ```
 
-You can also use 
+To use the latest commit:
 
 ```bash
 composer create-project cakephp/app-tailwind tailwind -s dev
 ```
-
-To use the latest version
 
 Next, install [tailwind](https://tailwindcss.com/docs) and [vite](https://vite.dev/guide/)
 with npm:

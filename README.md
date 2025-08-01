@@ -7,6 +7,12 @@ An application skeleton for creating applications with [CakePHP](https://cakephp
 
 The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
 
+## Requierements
+
+1. PHP >= 8.1
+2. NodeJS ^20.19.0 || >=22.12.0
+3. NPM >=8.0.0
+
 ## Installation
 
 1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
@@ -16,6 +22,12 @@ If Composer is installed globally, run
 
 ```bash
 composer create-project --prefer-dist cakephp/app-tailwind myapp
+```
+
+To use the latest commit:
+
+```bash
+composer create-project cakephp/app-tailwind tailwind -s dev
 ```
 
 Next, install [tailwind](https://tailwindcss.com/docs) and [vite](https://vite.dev/guide/)

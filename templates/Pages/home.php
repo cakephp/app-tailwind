@@ -85,24 +85,15 @@ endif;
             </h1>
         </div>
     </header>
-    <main class="main max-w-5xl mx-auto bg-white p-4 mb-10">
+    <main class="main max-w-5xl mx-auto bg-white p-4 mb-10 rounded-md shadow-md">
         <div class="container">
             <div class="content">
 
-                <div class="p-2 mb-4 bg-blue-100 border border-blue-500 text-blue-500 text-center text-sm">
+                <div class="p-2 mb-4 bg-blue-100 border border-blue-500 text-blue-500 text-center text-sm rounded-md">
                     Please be aware that this page will not be shown if you turn off debug mode unless you replace templates/Pages/home.php with your own version.
                 </div>
 
                 <div class="mb-4">
-                    <div class="p-4 bg-red-200 text-red-700">
-                        <ul class="list-none ml-7">
-                            <li class="bullet problem">
-                                URL rewriting is not properly configured on your server.<br />
-                                1) <a target="_blank" rel="noopener" href="https://book.cakephp.org/5/en/installation.html#url-rewriting">Help me configure it</a><br />
-                                2) <a target="_blank" rel="noopener" href="https://book.cakephp.org/5/en/development/configuration.html#general-configuration">I don't / can't use URL rewriting</a>
-                            </li>
-                        </ul>
-                    </div>
                     <?php Debugger::checkSecurityKeys(); ?>
                 </div>
 

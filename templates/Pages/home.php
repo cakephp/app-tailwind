@@ -74,42 +74,33 @@ endif;
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
-<body class="bg-gray-200 font-raleway">
+<body class="bg-gray-200">
     <header class="max-w-5xl mx-auto py-8">
         <div class="text-center">
             <a href="https://cakephp.org/" target="_blank" rel="noopener">
                 <img alt="CakePHP" src="https://cakephp.org/v2/img/logos/CakePHP_Logo.svg" width="350" class="block mx-auto mb-4" />
             </a>
-            <h1 class="text-4xl font-bold">
+            <h1 class="text-4xl font-raleway font-bold">
                 Welcome to CakePHP <?= h(Configure::version()) ?> Chiffon (🍰)
             </h1>
         </div>
     </header>
-    <main class="main max-w-5xl mx-auto bg-white p-4 mb-10">
+    <main class="main max-w-5xl mx-auto bg-white p-4 mb-10 rounded-md shadow-md">
         <div class="container">
             <div class="content">
 
-                <div class="p-2 mb-4 bg-blue-100 border border-blue-500 text-blue-500 text-center text-sm">
+                <div class="p-2 mb-4 bg-blue-100 border border-blue-500 text-blue-500 text-center text-sm rounded-md">
                     Please be aware that this page will not be shown if you turn off debug mode unless you replace templates/Pages/home.php with your own version.
                 </div>
 
                 <div class="mb-4">
-                    <div class="p-4 bg-red-200 text-red-700">
-                        <ul class="list-none ml-7">
-                            <li class="bullet problem">
-                                URL rewriting is not properly configured on your server.<br />
-                                1) <a target="_blank" rel="noopener" href="https://book.cakephp.org/5/en/installation.html#url-rewriting">Help me configure it</a><br />
-                                2) <a target="_blank" rel="noopener" href="https://book.cakephp.org/5/en/development/configuration.html#general-configuration">I don't / can't use URL rewriting</a>
-                            </li>
-                        </ul>
-                    </div>
                     <?php Debugger::checkSecurityKeys(); ?>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 [&_h4]:text-xl [&_h4]:mb-2 [&_ul]:ml-7 [&_li]:mb-1">
 
                     <div>
-                        <h4>Environment</h4>
+                        <h4 class="font-raleway">Environment</h4>
                         <ul>
                         <?php if (version_compare(PHP_VERSION, '8.1.0', '>=')) : ?>
                             <li class="bullet success">Your version of PHP is 8.1.0 or higher (detected <?= PHP_VERSION ?>).</li>
@@ -142,7 +133,7 @@ endif;
                     </div>
 
                     <div>
-                        <h4>Filesystem</h4>
+                        <h4 class="font-raleway">Filesystem</h4>
                         <ul>
                         <?php if (is_writable(TMP)) : ?>
                             <li class="bullet success">Your tmp directory is writable.</li>
@@ -158,7 +149,7 @@ endif;
 
                         <?php $settings = Cache::getConfig('_cake_translations_'); ?>
                         <?php if (!empty($settings)) : ?>
-                            <li class="bullet success">The <span class="bg-gray-500 text-white p-1"><?= h($settings['className']) ?></span> is being used for core caching. To change the config edit config/app.php</li>
+                            <li class="bullet success">The <span class="bg-gray-500 text-white p-1"><?= h($settings['className']) ?></span> engine is being used for core caching. To change the config edit <strong>config/app.php</strong></li>
                         <?php else : ?>
                             <li class="bullet problem">Your cache is NOT working. Please check the settings in config/app.php</li>
                         <?php endif; ?>
@@ -166,7 +157,7 @@ endif;
                     </div>
 
                     <div>
-                        <h4>Database</h4>
+                        <h4 class="font-raleway">Database</h4>
                         <?php
                         $result = $checkConnection('default');
                         ?>
@@ -180,7 +171,7 @@ endif;
                     </div>
 
                     <div>
-                        <h4>DebugKit</h4>
+                        <h4 class="font-raleway">DebugKit</h4>
                         <ul>
                         <?php if (Plugin::isLoaded('DebugKit')) : ?>
                             <li class="bullet success">DebugKit is loaded.</li>
@@ -204,7 +195,7 @@ endif;
                     <hr/>
 
                     <div>
-                        <h3>Getting Started</h3>
+                        <h3 class="font-raleway">Getting Started</h3>
                         <a target="_blank" rel="noopener" href="https://book.cakephp.org/5/en/">CakePHP Documentation</a>
                         <a target="_blank" rel="noopener" href="https://book.cakephp.org/5/en/tutorials-and-examples/cms/installation.html">The 20 min CMS Tutorial</a>
                     </div>
@@ -212,7 +203,7 @@ endif;
                     <hr/>
 
                     <div>
-                        <h3>Help and Bug Reports</h3>
+                        <h3 class="font-raleway">Help and Bug Reports</h3>
                         <a target="_blank" rel="noopener" href="https://slack-invite.cakephp.org/">Slack</a>
                         <a target="_blank" rel="noopener" href="https://github.com/cakephp/cakephp/issues">CakePHP Issues</a>
                         <a target="_blank" rel="noopener" href="https://discourse.cakephp.org/">CakePHP Forum</a>
@@ -221,7 +212,7 @@ endif;
                     <hr/>
 
                     <div>
-                        <h3>Docs and Downloads</h3>
+                        <h3 class="font-raleway">Docs and Downloads</h3>
                         <a target="_blank" rel="noopener" href="https://api.cakephp.org/">CakePHP API</a>
                         <a target="_blank" rel="noopener" href="https://bakery.cakephp.org">The Bakery</a>
                         <a target="_blank" rel="noopener" href="https://book.cakephp.org/5/en/">CakePHP Documentation</a>
@@ -234,7 +225,7 @@ endif;
                     <hr/>
 
                     <div>
-                        <h3>Training and Certification</h3>
+                        <h3 class="font-raleway">Training and Certification</h3>
                         <a target="_blank" rel="noopener" href="https://cakefoundation.org/">Cake Software Foundation</a>
                         <a target="_blank" rel="noopener" href="https://training.cakephp.org/">CakePHP Training</a>
                     </div>

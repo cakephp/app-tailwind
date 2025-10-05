@@ -62,12 +62,14 @@ endif;
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>
         CakePHP: the rapid development PHP framework:
         <?= $this->fetch('title') ?>
     </title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <?= $this->Html->meta('icon') ?>
-
     <?= $this->Html->css(['cake']) ?>
 
     <?= $this->fetch('meta') ?>
@@ -86,12 +88,12 @@ endif;
                     <path d="M665.4 75c0-9.2-6.4-14.1-16.7-14.1h-15.9v28.5h16.3c10.3 0 16.3-6.2 16.3-14.1zm-16.9 32.6h-15.6v28h-20.5V42.3h38.1c22.3 0 35.7 13.2 35.7 32.3v.3c0 21.5-16.8 32.7-37.7 32.7m111.3 28V98.2h-37.9v37.4h-20.5V42.3h20.5v36.9h37.9V42.3h20.5v93.3zm96-60.6c0-9.2-6.4-14.1-16.7-14.1h-15.9v28.5h16.3c10.3 0 16.3-6.2 16.3-14.1zm-16.9 32.6h-15.6v28h-20.5V42.3h38.1c22.3 0 35.7 13.2 35.7 32.3v.3c0 21.5-16.8 32.7-37.7 32.7" class="fill-cake"/>
                 </svg>
             </a>
-            <h1 class="text-4xl font-raleway font-bold dark:text-white">
+            <h1 class="text-3xl font-raleway font-bold dark:text-white">
                 Welcome to CakePHP <?= h(Configure::version()) ?> Chiffon (🍰)
             </h1>
         </div>
     </header>
-    <main class="main max-w-5xl mx-auto bg-white p-6 mb-10 rounded-md shadow-md dark:bg-base-200 dark:text-gray-300">
+    <main class="max-w-5xl mx-auto bg-white p-6 mb-10 rounded-lg shadow-md/10 dark:bg-base-200 dark:text-gray-300">
         <div class="container">
             <div class="content">
 

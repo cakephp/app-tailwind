@@ -62,12 +62,10 @@ endif;
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preconnect" href="https://fonts.bunny.net">
     <title>
         CakePHP: the rapid development PHP framework:
         <?= $this->fetch('title') ?>
     </title>
-    <link href="https://fonts.bunny.net/css?family=raleway:200,300,400,500" rel="stylesheet" />
     <?= $this->Html->meta('icon') ?>
     <?= $this->Html->css(['cake']) ?>
 
@@ -87,7 +85,7 @@ endif;
                     <path d="M665.4 75c0-9.2-6.4-14.1-16.7-14.1h-15.9v28.5h16.3c10.3 0 16.3-6.2 16.3-14.1zm-16.9 32.6h-15.6v28h-20.5V42.3h38.1c22.3 0 35.7 13.2 35.7 32.3v.3c0 21.5-16.8 32.7-37.7 32.7m111.3 28V98.2h-37.9v37.4h-20.5V42.3h20.5v36.9h37.9V42.3h20.5v93.3zm96-60.6c0-9.2-6.4-14.1-16.7-14.1h-15.9v28.5h16.3c10.3 0 16.3-6.2 16.3-14.1zm-16.9 32.6h-15.6v28h-20.5V42.3h38.1c22.3 0 35.7 13.2 35.7 32.3v.3c0 21.5-16.8 32.7-37.7 32.7" class="fill-cake"/>
                 </svg>
             </a>
-            <h1 class="text-3xl font-heading font-bold dark:text-white">
+            <h1 class="text-3xl font-bold dark:text-white">
                 Welcome to CakePHP <?= h(Configure::version()) ?> Chiffon (🍰)
             </h1>
         </div>
@@ -106,7 +104,7 @@ endif;
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 [&_h4]:text-xl [&_h4]:mb-5 [&_ul]:ml-7 [&_li]:mb-1">
                     <div>
-                        <h4 class="font-heading">Environment</h4>
+                        <h4>Environment</h4>
                         <ul>
                         <?php if (version_compare(PHP_VERSION, '8.1.0', '>=')) : ?>
                             <li class="bullet success">Your version of PHP is 8.1.0 or higher (detected <?= PHP_VERSION ?>).</li>
@@ -139,7 +137,7 @@ endif;
                     </div>
 
                     <div>
-                        <h4 class="font-heading">Filesystem</h4>
+                        <h4>Filesystem</h4>
                         <ul>
                         <?php if (is_writable(TMP)) : ?>
                             <li class="bullet success">Your tmp directory is writable.</li>
@@ -163,7 +161,7 @@ endif;
                     </div>
 
                     <div>
-                        <h4 class="font-heading">Database</h4>
+                        <h4>Database</h4>
                         <?php
                         $result = $checkConnection('default');
                         ?>
@@ -177,7 +175,7 @@ endif;
                     </div>
 
                     <div>
-                        <h4 class="font-heading">DebugKit</h4>
+                        <h4>DebugKit</h4>
                         <ul>
                         <?php if (Plugin::isLoaded('DebugKit')) : ?>
                             <li class="bullet success">DebugKit is loaded.</li>
@@ -199,20 +197,20 @@ endif;
                 <div class="space-y-4 [&_h3]:text-2xl [&_h3]:mb-2 [&_a]:inline-block [&_a]:mr-6 [&_a]:mb-4">
 
                     <div class="border-t border-gray-200 dark:border-base-100 pt-6">
-                        <h3 class="font-heading">Getting Started</h3>
+                        <h3>Getting Started</h3>
                         <a target="_blank" rel="noopener" href="https://book.cakephp.org/5/en/">CakePHP Documentation</a>
                         <a target="_blank" rel="noopener" href="https://book.cakephp.org/5/en/tutorials-and-examples/cms/installation.html">The 20 min CMS Tutorial</a>
                     </div>
 
                     <div class="border-t border-gray-200 dark:border-base-100 pt-6">
-                        <h3 class="font-heading">Help and Bug Reports</h3>
+                        <h3>Help and Bug Reports</h3>
                         <a target="_blank" rel="noopener" href="https://slack-invite.cakephp.org/">Slack</a>
                         <a target="_blank" rel="noopener" href="https://github.com/cakephp/cakephp/issues">CakePHP Issues</a>
                         <a target="_blank" rel="noopener" href="https://discourse.cakephp.org/">CakePHP Forum</a>
                     </div>
 
                     <div class="border-t border-gray-200 dark:border-base-100 pt-6">
-                        <h3 class="font-heading">Docs and Downloads</h3>
+                        <h3>Docs and Downloads</h3>
                         <a target="_blank" rel="noopener" href="https://api.cakephp.org/">CakePHP API</a>
                         <a target="_blank" rel="noopener" href="https://bakery.cakephp.org">The Bakery</a>
                         <a target="_blank" rel="noopener" href="https://book.cakephp.org/5/en/">CakePHP Documentation</a>
@@ -223,7 +221,7 @@ endif;
                     </div>
 
                     <div class="border-t border-gray-200 dark:border-base-100 pt-6">
-                        <h3 class="font-heading">Training and Certification</h3>
+                        <h3>Training and Certification</h3>
                         <a target="_blank" rel="noopener" href="https://cakefoundation.org/">Cake Software Foundation</a>
                         <a target="_blank" rel="noopener" href="https://training.cakephp.org/">CakePHP Training</a>
                     </div>

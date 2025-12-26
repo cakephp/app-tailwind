@@ -20,6 +20,7 @@ use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
 use Cake\Datasource\FactoryLocator;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
+use Cake\Event\EventManagerInterface;
 use Cake\Http\BaseApplication;
 use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
@@ -49,10 +50,8 @@ class Application extends BaseApplication
         parent::bootstrap();
 
         if (PHP_SAPI !== 'cli') {
-            FactoryLocator::add(
-                'Table',
-                (new TableLocator())->allowFallbackClass(false),
-            );
+            // The bake plugin requires fallback table classes to work properly
+            FactoryLocator::add('Table', (new TableLocator())->allowFallbackClass(false));
         }
     }
 
@@ -103,5 +102,19 @@ class Application extends BaseApplication
      */
     public function services(ContainerInterface $container): void
     {
+    }
+
+    /**
+     * Register custom event listeners here
+     *
+     * @param \Cake\Event\EventManagerInterface $eventManager
+     * @return \Cake\Event\EventManagerInterface
+     * @link https://book.cakephp.org/5/en/core-libraries/events.html#registering-listeners
+     */
+    public function events(EventManagerInterface $eventManager): EventManagerInterface
+    {
+        // $eventManager->on(new SomeCustomListenerClass());
+
+        return $eventManager;
     }
 }

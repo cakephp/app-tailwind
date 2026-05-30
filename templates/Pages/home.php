@@ -147,9 +147,9 @@ endif;
 
                         <?php $settings = Cache::getConfig('_cake_translations_'); ?>
                         <?php if (!empty($settings)) : ?>
-                            <li class="bullet success">The <span class="bg-gray-500 dark:bg-base-100 text-white p-1"><?= h($settings['className']) ?></span> engine is being used for core caching. To change the config edit <strong>config/app.php</strong></li>
+                            <li class="bullet success">The <span class="bg-gray-500 dark:bg-base-100 text-white p-1"><?= h($settings['className']) ?></span> engine is being used for translations caching. To change the config edit <code>config/app.php</code></li>
                         <?php else : ?>
-                            <li class="bullet problem">Your cache is NOT working. Please check the settings in config/app.php</li>
+                            <li class="bullet problem">Your translations cache is NOT working. Please check the settings in config/app.php</li>
                         <?php endif; ?>
                         </ul>
                     </div>
@@ -164,6 +164,13 @@ endif;
                             <li class="bullet success">CakePHP is able to connect to the database.</li>
                         <?php else : ?>
                             <li class="bullet problem">CakePHP is NOT able to connect to the database.<br /><?= h($result['error']) ?></li>
+                        <?php endif; ?>
+
+                        <?php $settings = Cache::getConfig('_cake_model_'); ?>
+                        <?php if (!empty($settings)) : ?>
+                            <li class="bullet success">The <em><?= h($settings['className']) ?></em> engine is being used for database schema caching. To change the config edit config/app.php</li>
+                        <?php else : ?>
+                            <li class="bullet problem">Your database schema cache is NOT working. Please check the settings in <code>config/app.php</code></li>
                         <?php endif; ?>
                         </ul>
                     </div>

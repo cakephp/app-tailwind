@@ -54,7 +54,7 @@ class Application extends BaseApplication
             // The bake plugin requires fallback table classes to work properly
             FactoryLocator::add(
                 'Table',
-                (new TableLocator())->allowFallbackClass(false), // @phpstan-ignore argument.type
+                (new TableLocator())->allowFallbackClass(false),
             );
         }
     }

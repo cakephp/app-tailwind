@@ -35,8 +35,6 @@ use Cake\Routing\Middleware\RoutingMiddleware;
  *
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
- *
- * @extends \Cake\Http\BaseApplication<\App\Application>
  */
 class Application extends BaseApplication
 {
@@ -50,13 +48,11 @@ class Application extends BaseApplication
         // Call parent to load bootstrap from files.
         parent::bootstrap();
 
-        if (PHP_SAPI !== 'cli') {
-            // The bake plugin requires fallback table classes to work properly
-            FactoryLocator::add(
-                'Table',
-                (new TableLocator())->allowFallbackClass(false),
-            );
-        }
+        // By default, does not allow fallback classes.
+        FactoryLocator::add(
+            'Table',
+            (new TableLocator())->allowFallbackClass(false),
+        );
     }
 
     /**
@@ -111,6 +107,8 @@ class Application extends BaseApplication
      */
     public function services(ContainerInterface $container): void
     {
+        // Allow your Tables to be dependency injected
+        //$container->delegate(new \Cake\ORM\Locator\TableContainer());
     }
 
     /**

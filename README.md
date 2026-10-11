@@ -9,7 +9,7 @@ The framework source code can be found here: [cakephp/cakephp](https://github.co
 
 ## Requierements
 
-1. PHP >= 8.1
+1. PHP >= 8.2
 2. NodeJS ^20.19.0 || >=22.12.0
 3. NPM >=8.0.0
 
